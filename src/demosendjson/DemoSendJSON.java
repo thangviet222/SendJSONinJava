@@ -24,13 +24,13 @@ public class DemoSendJSON {
      */
     public static void main(String[] args) {
         try {
-            SaveWorkFlow();
+            SaveWorkFlow("http://10.64.100.17:9119");
         } catch (IOException ex) {
             Logger.getLogger(DemoSendJSON.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public static void SaveWorkFlow() throws IOException {
+    public static void SaveWorkFlow(String URL) throws IOException {
         try {
             //build JSON OBJECT
             JSONObject js = new JSONObject();
@@ -39,7 +39,7 @@ public class DemoSendJSON {
             System.out.println(js.toString());
 
             //Send Request
-            URL url = new URL("http://10.64.100.17:9119");
+            URL url = new URL(URL);
             HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
             httpCon.setDoOutput(true);
             httpCon.setDoInput(true);
@@ -62,7 +62,6 @@ public class DemoSendJSON {
                 sb.append(line + "\n");
             }
             br.close();
-           
             JSONObject json = null;
             JSONObject json1 = new JSONObject(sb.toString());
             for (String key : JSONObject.getNames(json1)) {
